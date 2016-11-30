@@ -20,4 +20,13 @@ class GeoAndSportsModel extends CI_Model {
 
         $this->db->insert('city',$data);
     }
+
+    public function addSport($sport)
+    {
+        $data = array(
+            'sport' => $sport['sport']
+        );
+
+        $this->db->insert('sports',$data);
+    }
 }

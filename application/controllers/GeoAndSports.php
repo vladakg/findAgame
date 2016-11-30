@@ -60,4 +60,27 @@ class GeoAndSports extends REST_Controller {
             $this->response($response, REST_Controller::HTTP_OK); //send response back with success message
         }
     }
+
+    public function createSport_post()
+    {
+        $sport = $this->input->post('sports');
+
+        $_POST['sport'] = $sport['sport']; //prepare input fields for codeigniter Form validation library
+        $this->form_validation->set_rules('sport', 'Sport', 'trim|required|strip_tags|max_length[45]|is_unique[sports.sport]');
+
+        if ($this->form_validation->run() === FALSE) {
+            $error = array(
+                'sport' => $this->form_validation->error('sport'),
+                'success' => false
+            );
+            $this->response($error, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION); //send response back with all errors
+        } else {
+            $this->GeoAndSportsModel->addSport($sport);
+            $response = array(
+                'success' => true,
+                'response' => $sport
+            );
+            $this->response($response, REST_Controller::HTTP_OK); //send response back with success message
+        }
+    }
 }
