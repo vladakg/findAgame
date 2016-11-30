@@ -9,7 +9,7 @@ class Migration_initial extends CI_Migration
         $sqlCountry = "CREATE TABLE IF NOT EXISTS country (
   			id_coun tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   			state varchar(45) DEFAULT NULL COMMENT 'country name',
-  			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_coun),
   			UNIQUE KEY state (state)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='List of available countries' AUTO_INCREMENT=1";
@@ -21,7 +21,7 @@ class Migration_initial extends CI_Migration
   			id_city smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   			id_coun tinyint(3) unsigned DEFAULT NULL COMMENT 'which country belongs to',
   			town varchar(45) DEFAULT NULL COMMENT 'city name',
-  			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_city),
   			FOREIGN KEY (id_coun) REFERENCES country(id_coun),
   			UNIQUE KEY town (town)
@@ -33,7 +33,7 @@ class Migration_initial extends CI_Migration
         $sqlCountry = "CREATE TABLE IF NOT EXISTS sports (
   			id_spo tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   			sport varchar(45) DEFAULT NULL COMMENT 'sport name',
-  			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_spo),
   			UNIQUE KEY sport (sport)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='List of available sports' AUTO_INCREMENT=1";
@@ -45,7 +45,7 @@ class Migration_initial extends CI_Migration
   			id_adr int(10) unsigned NOT NULL AUTO_INCREMENT,
   			id_city smallint(5) unsigned DEFAULT NULL COMMENT 'which city belongs to',
   			street varchar(100) DEFAULT NULL COMMENT 'street name',
-  			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_adr),
   			FOREIGN KEY (id_city) REFERENCES city(id_city),
   			UNIQUE KEY street (street)
@@ -65,7 +65,7 @@ class Migration_initial extends CI_Migration
   			picture varchar(45) DEFAULT NULL COMMENT 'user picture',
   			mobile varchar(45) DEFAULT NULL COMMENT 'user cell phone number',
   			gender enum('male','female') NOT NULL DEFAULT 'male',
-  			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_user),
   			FOREIGN KEY (id_city) REFERENCES city(id_city),
   			UNIQUE KEY email (email)
@@ -78,7 +78,7 @@ class Migration_initial extends CI_Migration
   			id_first int(10) unsigned DEFAULT NULL,
   			id_second int(10) unsigned DEFAULT NULL,
   			status enum('accepted','block','pending','decline') NOT NULL DEFAULT 'accepted',
-  			request datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Time when friendship request has been sent',
+  			request timestamp DEFAULT CURRENT_TIMESTAMP COMMENT 'Time when friendship request has been sent',
   			acknowledge datetime DEFAULT NULL COMMENT 'Time of response',
   			PRIMARY KEY (id_first,id_second)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='friendship between users' AUTO_INCREMENT=1";
@@ -93,7 +93,7 @@ class Migration_initial extends CI_Migration
   			number varchar(10) DEFAULT NULL COMMENT 'number of place in street',
   			website varchar(45) DEFAULT NULL COMMENT 'external link',
   			working varchar(45) DEFAULT NULL COMMENT 'working time',
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_loc),
   			FOREIGN KEY (id_city) REFERENCES city(id_city),
   			FOREIGN KEY (id_adr) REFERENCES adresses(id_adr)
@@ -106,7 +106,7 @@ class Migration_initial extends CI_Migration
   			id_gal int(10) unsigned NOT NULL AUTO_INCREMENT,
   			id_loc int(10) unsigned DEFAULT NULL COMMENT 'which location belongs to',
   			image varchar(45) DEFAULT NULL COMMENT 'location image',
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_gal),
   			FOREIGN KEY (id_loc) REFERENCES location(id_loc)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='All pictures of location' AUTO_INCREMENT=1";
@@ -117,7 +117,7 @@ class Migration_initial extends CI_Migration
         $sqlCountry = "CREATE TABLE IF NOT EXISTS offer (
   			id_off tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   			supply varchar(30) DEFAULT NULL COMMENT 'shower, locker room, wifi, ...',
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_off)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Extras, like shower, caffe, wifi, ...' AUTO_INCREMENT=1";
 
@@ -127,7 +127,7 @@ class Migration_initial extends CI_Migration
         $sqlCountry = "CREATE TABLE IF NOT EXISTS proffer (
   			id_loc int(10) unsigned DEFAULT NULL,
   			id_off tinyint(10) unsigned DEFAULT NULL,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_loc,id_off)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relation between location and offer' AUTO_INCREMENT=1";
 
@@ -144,7 +144,7 @@ class Migration_initial extends CI_Migration
   			additional varchar(255) DEFAULT NULL COMMENT 'some additional information',
   			events_date datetime DEFAULT NULL COMMENT 'date of event',
   			events_time datetime DEFAULT NULL COMMENT 'time of event',
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_eve),
   			FOREIGN KEY (id_loc) REFERENCES location(id_loc),
   			FOREIGN KEY (id_spo) REFERENCES sports(id_spo),
@@ -157,7 +157,7 @@ class Migration_initial extends CI_Migration
         $sqlCountry = "CREATE TABLE IF NOT EXISTS participants (
   			id_eve int(10) unsigned DEFAULT NULL,
   			id_user int(10) unsigned DEFAULT NULL,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			FOREIGN KEY (id_eve) REFERENCES events(id_eve),
   			FOREIGN KEY (id_user) REFERENCES user(id_user)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Participants of some event' AUTO_INCREMENT=1";
@@ -173,6 +173,7 @@ class Migration_initial extends CI_Migration
   			reliability tinyint(3) unsigned DEFAULT NULL,
   			fitness tinyint(3) unsigned DEFAULT NULL,
   			skills tinyint(3) unsigned DEFAULT NULL,
+  			created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   			PRIMARY KEY (id_eva),
   			FOREIGN KEY (id_user) REFERENCES user(id_user),
   			FOREIGN KEY (evaluator) REFERENCES user(id_user),

@@ -5,8 +5,8 @@ require APPPATH . '/libraries/REST_Controller.php';
 
 class Users extends REST_Controller {
 
-	public function test_get()
+	public function createUser_post()
 	{
-		echo "sdsd";
+		
 	}
 }
