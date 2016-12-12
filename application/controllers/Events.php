@@ -23,5 +23,8 @@ class Events extends REST_Controller {
         $this->response($response, REST_Controller::HTTP_OK); //send response back with success message
 	}
 
+    public function dsdsfs()
+    {
 
+    }
 }
