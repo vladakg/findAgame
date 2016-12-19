@@ -24,9 +24,9 @@ class GeoAndSports extends REST_Controller {
                 'country' => $this->form_validation->error('state'),
                 'success' => false
             );
-            $this->response($error, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION); //send response back with all errors
+            $this->response($error, REST_Controller::HTTP_FORBIDDEN); //send response back with all errors
         } else {
-            $this->GeoAndSportsModel->addCountry($country);
+            $this->GeoAndSportsModel->createCountry($country);
             $response = array(
                 'success' => true,
                 'response' => $country
@@ -50,9 +50,9 @@ class GeoAndSports extends REST_Controller {
                 'city' => $this->form_validation->error('town'),
                 'success' => false
             );
-            $this->response($error, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION); //send response back with all errors
+            $this->response($error, REST_Controller::HTTP_FORBIDDEN); //send response back with all errors
         } else {
-            $this->GeoAndSportsModel->addCity($city);
+            $this->GeoAndSportsModel->createCity($city);
             $response = array(
                 'success' => true,
                 'response' => $city
@@ -73,9 +73,9 @@ class GeoAndSports extends REST_Controller {
                 'sport' => $this->form_validation->error('sport'),
                 'success' => false
             );
-            $this->response($error, REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION); //send response back with all errors
+            $this->response($error, REST_Controller::HTTP_FORBIDDEN); //send response back with all errors
         } else {
-            $this->GeoAndSportsModel->addSport($sport);
+            $this->GeoAndSportsModel->createSport($sport);
             $response = array(
                 'success' => true,
                 'response' => $sport

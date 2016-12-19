@@ -2,7 +2,7 @@
 
 class GeoAndSportsModel extends CI_Model {
 
-    public function addCountry($country)
+    public function createCountry($country)
     {
         $data = array(
             'state' => $country['state']
@@ -11,7 +11,7 @@ class GeoAndSportsModel extends CI_Model {
         $this->db->insert('country',$data);
     }
 
-    public function addCity($city)
+    public function createCity($city)
     {
         $data = array(
             'id_coun' => $city['id_coun'],
@@ -21,7 +21,7 @@ class GeoAndSportsModel extends CI_Model {
         $this->db->insert('city',$data);
     }
 
-    public function addSport($sport)
+    public function createSport($sport)
     {
         $data = array(
             'sport' => $sport['sport']
